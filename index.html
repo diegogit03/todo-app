@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Todo-app</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div id="root">
+            <header>
+                <h1>Todo-app</h1>
+                <div id="todos-input">
+                    <input type="text"
+                        @keypress.enter="addNewTodo"
+                        v-model="todoInput"
+                        placeholder="Digite sua tarefa aqui" />
+
+                    <button @click="addNewTodo">
+                        adicionar
+                    </button>
+                </div>
+                <template v-if="error">
+                    <p class="error-message-text">{{ error }}</p>
+                </template>
+                <div class="division"></div>
+            </header>
+
+            <main>
+                <div id="todo-list">
+                    <h2>Ativos</h2>
+                    <div class="division"></div>
+                    <template v-for="todo in todos">
+                        <template v-if="todo.finished === false">
+                            <div class="todo" :data-id="todo.id">
+                                <h3>{{ todo.title }}</h3>
+                                <div class="actions-in-todo">
+                                    <button @click="finishTodo($event)">&#10004;</button>
+                                    <button @click="removeTodo($event)">-</button>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
+                    <h2>Completos</h2>
+                    <div class="division"></div>
+                    <template v-for="todo in todos">
+                        <template v-if="todo.finished === true">
+                            <div class="todo" :data-id="todo.id">
+                                <h3>{{ todo.title }}</h3>
+                                <div class="actions-in-todo">
+                                    <button @click="removeTodo($event)">-</button>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
+                </div>
+            </main>
+        </div>
+
+        <script type="module" src="./script.mjs"></script>
+    </body>
+</html>
