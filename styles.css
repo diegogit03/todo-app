@@ -105,4 +105,5 @@ div.todo > .actions-in-todo > button:nth-child(2) {
 
 .alert-message {
     background-color: red;
+    text-align: center;
 }
