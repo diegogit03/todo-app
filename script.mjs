@@ -13,7 +13,7 @@ const methods = {
         if (this.error) this.error = '';
 
         const todoObject = {
-            id: this.todos.length + 1,
+            id: uuid.v4(),
             title: this.todoInput,
             finished: false
         };
@@ -29,7 +29,7 @@ const methods = {
     },
     removeTodo(event) {
         const todoHtmlElement = event.target.parentNode.parentNode;
-        const idTodo = parseInt(todoHtmlElement.dataset.id) - 1;
+        const idTodo = todoHtmlElement.dataset.id;
 
         let todoIndex;
 
@@ -41,7 +41,7 @@ const methods = {
     },
     finishTodo(event) {
         const todoHtmlElement = event.target.parentNode.parentNode;
-        const idTodo = parseInt(todoHtmlElement.dataset.id);
+        const idTodo = todoHtmlElement.dataset.id;
 
         this.todos.forEach(value => value.id === idTodo ? value.finished = true : value);
         localStorage.setItem('todos', JSON.stringify(this.todos));
