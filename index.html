@@ -11,6 +11,7 @@
     </head>
     <body>
         <div id="root">
+            <hello></hello>
             <header>
                 <div class="alert-message">
                     O sistema está em fase de testes
@@ -38,11 +39,11 @@
                     <div class="division"></div>
                     <template v-for="todo in todos">
                         <template v-if="todo.finished === false">
-                            <div class="todo" :data-id="todo.id">
+                            <div class="todo" :key="todo.id" :data-id="todo.id">
                                 <h3>{{ todo.title }}</h3>
                                 <div class="actions-in-todo">
-                                    <button @click="finishTodo($event)">&#10004;</button>
-                                    <button @click="removeTodo($event)">-</button>
+                                    <button @click="finishTodo(todo.id)">&#10004;</button>
+                                    <button @click="removeTodo(todo.id)">-</button>
                                 </div>
                             </div>
                         </template>
@@ -51,10 +52,10 @@
                     <div class="division"></div>
                     <template v-for="todo in todos">
                         <template v-if="todo.finished === true">
-                            <div class="todo" :data-id="todo.id">
+                            <div class="todo" :key="todo.id" :data-id="todo.id">
                                 <h3>{{ todo.title }}</h3>
                                 <div class="actions-in-todo">
-                                    <button @click="removeTodo($event)">-</button>
+                                    <button @click="removeTodo(todo.id)">-</button>
                                 </div>
                             </div>
                         </template>

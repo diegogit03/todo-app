@@ -27,9 +27,7 @@ const methods = {
         this.todos = todoListParsedToArray;
         this.todoInput = '';
     },
-    removeTodo(event) {
-        const todoHtmlElement = event.target.parentNode.parentNode;
-        const idTodo = todoHtmlElement.dataset.id;
+    removeTodo(idTodo) {
 
         let todoIndex;
 
@@ -39,9 +37,7 @@ const methods = {
 
         this.todos.splice(todoIndex, 1);
     },
-    finishTodo(event) {
-        const todoHtmlElement = event.target.parentNode.parentNode;
-        const idTodo = todoHtmlElement.dataset.id;
+    finishTodo(idTodo) {
 
         this.todos.forEach(value => value.id === idTodo ? value.finished = true : value);
         localStorage.setItem('todos', JSON.stringify(this.todos));
